@@ -40,6 +40,8 @@ group :development, :test do
   gem "standard"
   # Security vulnerability scanner for Ruby on Rails. (https://brakemanscanner.org)
   gem "brakeman"
+  # RSpec for Rails (https://github.com/rspec/rspec-rails)
+  gem "rspec-rails"
 end
 
 group :development do
