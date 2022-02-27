@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    name: CI
+    runs-on: ubuntu-latest
+    env:
+      RAILS_ENV: test
+    services:
+      postgres:
+        image: postgres:14.2-alpine
+        env:
+          POSTGRES_PASSWORD: bowling
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+    - name: Install Ruby Dependencies
+      uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true
+    - name: Standard
+      run: |
+        bundle exec standardrb
