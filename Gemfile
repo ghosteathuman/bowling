@@ -38,6 +38,8 @@ group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]
   # Ruby Style Guide, with linter & automatic code fixer (https://github.com/testdouble/standard)
   gem "standard"
+  # Security vulnerability scanner for Ruby on Rails. (https://brakemanscanner.org)
+  gem "brakeman"
 end
 
 group :development do

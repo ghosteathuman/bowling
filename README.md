@@ -22,3 +22,10 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+
+## Creation Command
+```
+rails new bowling --api -d postgresql -skip-action-cable --skip-action-mailbox --skip-action-mailer --skip-action-text --skip-active-storage --skip-keeps --skip-turbolinks
+
+```

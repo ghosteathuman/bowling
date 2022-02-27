@@ -30,6 +30,9 @@ jobs:
       uses: ruby/setup-ruby@v1
       with:
         bundler-cache: true
+    - name: Brakeman
+      run: |
+        bundle exec brakeman
     - name: Standard
       run: |
         bundle exec standardrb
