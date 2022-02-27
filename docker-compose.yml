@@ -1,0 +1,9 @@
+version: "3"
+services:
+  db:
+    image: postgres:14.2-alpine
+    container_name: bowling-db
+    environment:
+      - POSTGRES_PASSWORD=bowling
+    ports:
+      - 5432:5432
