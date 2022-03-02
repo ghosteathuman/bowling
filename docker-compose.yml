@@ -7,3 +7,10 @@ services:
       - POSTGRES_PASSWORD=bowling
     ports:
       - 5432:5432
+
+  redis:
+    image: redis:6.2.6-alpine
+    container_name: bowling-redis
+    command: redis-server --requirepass bowling
+    ports:
+      - "6379:6379"
