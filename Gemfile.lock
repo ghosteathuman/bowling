@@ -92,6 +92,9 @@ GEM
     io-wait (0.2.1)
     irb (1.4.1)
       reline (>= 0.3.0)
+    kredis (1.1.0)
+      activesupport (>= 6.0.0)
+      redis (~> 4.2)
     loofah (2.14.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -160,6 +163,7 @@ GEM
       zeitwerk (~> 2.5)
     rainbow (3.1.1)
     rake (13.0.6)
+    redis (4.6.0)
     regexp_parser (2.2.1)
     reline (0.3.1)
       io-console (~> 0.5)
@@ -219,6 +223,7 @@ DEPENDENCIES
   brakeman
   debug
   factory_bot_rails
+  kredis
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.2, >= 7.0.2.2)
