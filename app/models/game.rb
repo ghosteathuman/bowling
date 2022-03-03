@@ -16,7 +16,7 @@ class Game < ApplicationRecord
     frames[0..10].each_with_index do |frame, index|
       calculate_strike(frame, index)
       calculate_spare(frame, index)
-      frame_score << frame.score
+      frame_score << (frame_score.elements[index - 1] || 0) + frame.score
     end
     total_score.value = frames[0..10].inject(0) { |sum, frame| sum + frame.score }
   end
@@ -37,7 +37,11 @@ class Game < ApplicationRecord
     return if score_for_frame(index + 1).nil?
     return if score_for_frame(index + 2).nil? && index < 9
 
-    frame.score += (score_for_frame(index + 1) || 0) + (score_for_frame(index + 2) || 0)
+    if frames[index + 1].strike?
+      frame.score += (score_for_frame(index + 1) || 0) + (score_for_frame(index + 2) || 0)
+    elsif frames[index + 1].finished?
+      frame.score += (score_for_frame(index + 1) || 0)
+    end
   end
 
   def calculate_spare(frame, index)
