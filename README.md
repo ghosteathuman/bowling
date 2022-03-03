@@ -1,30 +1,47 @@
-# README
+# Bowling
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This Rails app intents to implement a ten-pin bowling scoring service.
 
-Things you may want to cover:
+## Getting Ready
 
-* Ruby version
+- [Ruby 3.1](https://www.ruby-lang.org/en/downloads/) required.
 
-* System dependencies
+## Getting Started
 
-* Configuration
+1. Clone this project.
+2. Install dependencies with:
+```bash
+$ bundle install
+```
 
-* Database creation
+## Using Docker Compose
 
-* Database initialization
+Docker Compose can be used to setup the PostgreSQL and Redis instance for local development.
 
-* How to run the test suite
+Run the command:
+```bash
+$ docker-compose up -d
+```
+## Decision Log
 
-* Services (job queues, cache servers, search engines, etc.)
+### Score Calculation Algorithm
 
-* Deployment instructions
+After several rounds of testing, I will note that the algorithm might have some odd (but accurate) result
+which will correct itself at the end of game.
 
-* ...
+The calculation caters for scores being streamed in, rather than knowing all the scores in advance,
+which requires different calculation method to cater for different scenarios.
 
+I will note that while it is possible to perform exhautive testing against every permutation of bowling
+scores to ensure the calculation algorithm is accurate, I did not do so and only opt-ed for selective 
+testing.
+### Usage of Kredis
+Kredis was added into the project and used to score the game score and scores per frame
+due to the requirements of an API constantly requesting for scores.
+Using an in-memory data store will allows for quicker response for the API and
+will reduce the bottleneck on disk read / write from the database.
 
-## Creation Command
+## Rails Creation Command
 ```
 rails new bowling --api -d postgresql -skip-action-cable --skip-action-mailbox --skip-action-mailer --skip-action-text --skip-active-storage --skip-keeps --skip-turbolinks
 
