@@ -14,7 +14,7 @@ class GamesController < ApplicationController
     @game = Game.new
 
     if @game.save
-      render :show, status: :created, location: @game
+      render json: {game_id: @game.id}, status: :created, location: @game
     else
       render json: @game.errors, status: :unprocessable_entity
     end
@@ -31,7 +31,10 @@ class GamesController < ApplicationController
 
     @game.record_pins(pin_score)
     @game.calculate_score
-    head :ok
+    render json: {
+      total_score: @game.total_score.value,
+      frame_score: @game.frame_score.elements
+    }, status: :ok
   end
 
   private

@@ -32,6 +32,17 @@ RSpec.describe "Games", type: :request do
       expect(game.frame_score.elements).to eq [10]
     end
 
+    it "will update existing game with all strikes accurately" do
+      game = Game.create
+      12.times do
+        put "/games/#{game.id}?pins=10"
+      end
+
+      expect(response).to have_http_status(:ok)
+      expect(game.total_score.value).to eq 300
+      expect(game.frame_score.elements).to eq [30, 60, 90, 120, 150, 180, 210, 240, 270, 300]
+    end
+
     it "will update existing game with invalid number of pins" do
       game = Game.create
       put "/games/#{game.id}?pins=20"

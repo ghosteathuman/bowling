@@ -5,6 +5,7 @@ class Frame < ApplicationRecord
 
   def insert_score(score)
     self.score += score
+    update(score: self.score)
     update_frame_status
   end
 
@@ -24,9 +25,9 @@ class Frame < ApplicationRecord
 
   def update_frame_status
     if first_roll == false
-      self.first_roll = true
+      update(first_roll: true)
     else
-      self.second_roll = true
+      update(second_roll: true)
     end
   end
 end
