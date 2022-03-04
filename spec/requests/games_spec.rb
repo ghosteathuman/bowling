@@ -1,15 +1,6 @@
 require "rails_helper"
 
 RSpec.describe "Games", type: :request do
-  describe "create" do
-    it "will create new game" do
-      post "/games"
-
-      expect(response).to have_http_status(:created)
-      expect(Game.count).to eq 1
-    end
-  end
-
   describe "show" do
     let(:game) { create(:game) }
     it "will show an existing game" do
@@ -19,6 +10,15 @@ RSpec.describe "Games", type: :request do
       expect(response).to have_http_status(:ok)
       expect(response.body).to include("total_score")
       expect(response.body).to include("frame_score")
+    end
+  end
+
+  describe "create" do
+    it "will create new game" do
+      post "/games"
+
+      expect(response).to have_http_status(:created)
+      expect(Game.count).to eq 1
     end
   end
 

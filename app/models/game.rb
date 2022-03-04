@@ -5,6 +5,8 @@ class Game < ApplicationRecord
   kredis_list :frame_score, typed: :integer
 
   def record_pins(number_of_pins)
+    # Ensure that frames are still in bounds within 10 frames & cater for
+    # addition for strikes & spares
     if frames.length < 10 || frames.length == 10 && !frames.last&.finished? || frames.length == 10 && frames.last&.strike? || frames.length == 10 && frames.last&.spare?
       current_frame.insert_score(number_of_pins)
     end
@@ -13,6 +15,7 @@ class Game < ApplicationRecord
   def calculate_score
     frames = self.frames.to_a
     frame_score.clear
+    # Index is to perform calculation within bounds
     frames[0..10].each_with_index do |frame, index|
       calculate_strike(frame, index)
       calculate_spare(frame, index)
@@ -37,6 +40,8 @@ class Game < ApplicationRecord
     return if score_for_frame(index + 1).nil?
     return if score_for_frame(index + 2).nil? && index < 9
 
+    # If next frame is also a strike, ensure the next frame after next is
+    # calculated
     if frames[index + 1].strike?
       frame.score += (score_for_frame(index + 1) || 0) + (score_for_frame(index + 2) || 0)
     elsif frames[index + 1].finished?
