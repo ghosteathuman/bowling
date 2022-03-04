@@ -4,8 +4,7 @@ class Frame < ApplicationRecord
   validates :score, comparison: {less_than_or_equal_to: 30}
 
   def insert_score(score)
-    self.score += score
-    update(score: self.score)
+    update(score: self.score += score)
     update_frame_status
   end
 

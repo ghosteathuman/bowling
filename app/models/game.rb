@@ -38,7 +38,9 @@ class Game < ApplicationRecord
   def calculate_strike(frame, index)
     return unless frame.strike?
     return if score_for_frame(index + 1).nil?
+    # This is to cater for strikes that are before the end of the game
     return if score_for_frame(index + 2).nil? && index < 8
+    # This is to cater for strikes near the end of the game
     return if score_for_frame(index + 2).nil? && index.between?(8, 9) && frames[index + 1].strike?
 
     # If next frame is also a strike, ensure the frame after next is included
