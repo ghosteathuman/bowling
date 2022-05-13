@@ -2,6 +2,12 @@
 
 This Rails app intents to implement a ten-pin bowling scoring service.
 
+## ARCHIVED
+
+This app is now **ARCHIVED** and will not be updated.
+
+MIT license applies to the archived code without prejudice.
+
 ## Getting Ready
 
 - [Ruby 3.1](https://www.ruby-lang.org/en/downloads/) required.
